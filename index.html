@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Entry and GPA Calculation</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="container mt-5">
+  <div id="markEntryForm">
+    <h2>Enter Marks</h2>
+    <div class="row">
+      <div class="col">
+        <label for="subject1">Subject 1:</label>
+        <input type="number" class="form-control" id="subject1" required>
+      </div>
+      <div class="col">
+        <label for="subject2">Subject 2:</label>
+        <input type="number" class="form-control" id="subject2" required>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <label for="subject3">Subject 3:</label>
+        <input type="number" class="form-control" id="subject3" required>
+      </div>
+      <div class="col">
+        <label for="subject4">Subject 4:</label>
+        <input type="number" class="form-control" id="subject4" required>
+      </div>
+    </div>
+    <button id="submitMarks" class="btn btn-primary mt-3">Submit</button>
+  </div>
+  <div id="resultTable" class="hidden mt-5">
+    <h2>Result</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Subject 1</td>
+          <td id="mark1"></td>
+        </tr>
+        <tr>
+          <td>Subject 2</td>
+          <td id="mark2"></td>
+        </tr>
+        <tr>
+          <td>Subject 3</td>
+          <td id="mark3"></td>
+        </tr>
+        <tr>
+          <td>Subject 4</td>
+          <td id="mark4"></td>
+        </tr>
+        <tr>
+          <td><strong>GPA</strong></td>
+          <td id="gpa"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#submitMarks").click(function() {
+      var marks = [];
+      marks.push($("#subject1").val());
+      marks.push($("#subject2").val());
+      marks.push($("#subject3").val());
+      marks.push($("#subject4").val());
+      
+      var totalMarks = marks.reduce((acc, val) => acc + parseInt(val), 0);
+      var gpa = totalMarks / marks.length;
+      
+      $("#mark1").text(marks[0]);
+      $("#mark2").text(marks[1]);
+      $("#mark3").text(marks[2]);
+      $("#mark4").text(marks[3]);
+      $("#gpa").text(gpa.toFixed(2));
+      
+      $("#markEntryForm").addClass("hidden");
+      $("#resultTable").removeClass("hidden");
+    });
+  });
+</script>
+</body>
+</html>
